@@ -9,8 +9,13 @@ import ru.lexa.number_generator.service.NumberService;
 @RestController
 @RequestMapping("/number")
 public class MainController {
+
+	private NumberService numberService;
+
 	@Autowired
-	private static NumberService numberService;
+	public MainController(NumberService numberService) {
+		this.numberService = numberService;
+	}
 
 	@GetMapping("/next")
 	public String nextNumber() {
@@ -19,6 +24,6 @@ public class MainController {
 
 	@GetMapping("/random")
 	public String randomNumber() {
-		return "";
+		return numberService.getRandomNumber().toString();
 	}
 }

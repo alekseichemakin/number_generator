@@ -10,10 +10,10 @@ public class CarNumber {
 	@Column(name = "id", nullable = false)
 	private Long id;
 
-	private int region = 116;
-	private String country = "RUS";
 	private String letters;
 	private int numbers;
+	private int region = 116;
+	private String country = "RUS";
 
 	public CarNumber(String letters, int numbers) {
 		this.letters = letters;
@@ -57,7 +57,7 @@ public class CarNumber {
 
 	@Override
 	public String toString() {
-		String num = String.format("%3d", numbers);
+		String num = String.format("%03d", numbers);
 		return letters.charAt(0) + num + letters.charAt(1) + letters.charAt(2) + " " + region + " " + country;
 	}
 
