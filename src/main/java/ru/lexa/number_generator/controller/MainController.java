@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.lexa.number_generator.model.CarNumber;
 import ru.lexa.number_generator.service.NumberService;
 
 @RestController
@@ -19,11 +20,17 @@ public class MainController {
 
 	@GetMapping("/next")
 	public String nextNumber() {
-		return numberService.getNextNumber().toString();
+		CarNumber carNumber = numberService.getNextNumber();
+		if (carNumber == null)
+			return "The numbers are over";
+		return carNumber.toString();
 	}
 
 	@GetMapping("/random")
 	public String randomNumber() {
-		return numberService.getRandomNumber().toString();
+		CarNumber carNumber = numberService.getRandomNumber();
+		if (carNumber == null)
+			return "The numbers are over";
+		return carNumber.toString();
 	}
 }

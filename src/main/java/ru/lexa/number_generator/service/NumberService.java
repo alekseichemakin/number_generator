@@ -13,8 +13,8 @@ public class NumberService {
 	private NumberRepository numberRepository;
 
 	private CarNumber lastNum = new CarNumber("AAA", 0);
-
 	private String letters = "ABEKMHOPCTYX";
+
 
 	public NumberService() {
 	}
@@ -61,16 +61,24 @@ public class NumberService {
 		CarNumber newNumber;
 		StringBuilder numLetters = new StringBuilder();
 
-		for (int i = 0; i < 3; i++) {
+		//if all numbers are used
+		if (lastNum.equals(new CarNumber("XXX", 999)))
+			return null;
+
+		//create random letters
+		for (int i = 0; i < 3; i++)
 			numLetters.append(letters.charAt(new Random().nextInt(letters.length())));
-		}
+
+		//create random nums
 		int nums = (new Random().nextInt(999)) + 1;
 
 		newNumber = new CarNumber(numLetters.toString(), nums);
 
+		//check that new number doesn't exist in DB
 		if (numberRepository.findCarNumberByLettersAndNumbers(newNumber.getLetters(), newNumber.getNumbers()) != null)
 			newNumber = getRandomNumber();
 
+		//add new num to DB
 		numberRepository.save(newNumber);
 		return newNumber;
 	}
