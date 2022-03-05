@@ -10,13 +10,8 @@ import ru.lexa.number_generator.service.NumberService;
 @RestController
 @RequestMapping("/number")
 public class MainController {
-
-	private NumberService numberService;
-
 	@Autowired
-	public MainController(NumberService numberService) {
-		this.numberService = numberService;
-	}
+	private NumberService numberService;
 
 	@GetMapping("/next")
 	public String nextNumber() {
